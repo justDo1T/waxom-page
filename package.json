@@ -1,0 +1,14 @@
+{
+  "name": "waxom-page",
+  "version": "1.0.0",
+  "description": "Sample page - Waxom mockup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrian Siewiera",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta"
+  }
+}
