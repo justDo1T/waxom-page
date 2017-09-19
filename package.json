@@ -4,8 +4,9 @@
   "description": "Sample page - Waxom mockup",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "dev": "webpack -d --watch"
+    "start": "npm run dev",
+    "dev": "webpack-dev-server",
+    "prod": "webpack -p"
   },
   "author": "Adrian Siewiera",
   "license": "ISC",

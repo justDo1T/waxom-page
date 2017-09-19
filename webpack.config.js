@@ -1,11 +1,18 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractSass = new ExtractTextPlugin({
-    filename: 'style.bundle.css'
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
+
+var extractSass = new ExtractTextPlugin({
+    filename: 'style.bundle.css',
+    disable: !isProd
 });
 
-// required for HMR (Hot Module Replacement) - also in devServer hot: true, in plugins: new webpack.HotModuleReplacementPlugin()
-// HMR doesn't work with ExtractTextPlugin, so i disabled if for development mode
-const webpack = require('webpack');
+var isProd = process.argv.indexOf('-p') !== -1;  //true or false
+var cssDev = ['style-loader', 'css-loader', 'sass-loader'];
+var cssProd = extractSass.extract({
+    fallback: 'style-loader',
+    use: ['css-loader', 'sass-loader']
+});
+var cssConfig = isProd ? cssProd : cssDev;
 
 module.exports = {
 
@@ -18,11 +25,7 @@ module.exports = {
         rules: [
             {
                 test: /\.scss$/,
-                // use: ['style-loader', 'css-loader', 'sass-loader']
-                use: extractSass.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
-                })
+                use: cssConfig
             }
         ]
     },
